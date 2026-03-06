@@ -33,7 +33,7 @@
 .prose h5 {
   font-size: var(--font-size-m);
   font-weight: var(--font-weight-bold);
-  line-height: 1.75;
+  line-height: 1.8;
   margin: 3.75em 0 1.75em 0;
 }
 
@@ -65,8 +65,8 @@
 
 /* Paragraphs */
 .prose p {
-  line-height: 1.75;
-  margin: 1.75em 0;
+  line-height: 1.8;
+  margin: 1.8em 0;
 }
 
 /* Tables */
@@ -107,13 +107,21 @@
 }
 
 /* Images */
+/* 修改原有的 .prose img */
 .prose img {
   max-width: 100%;
   height: auto;
   display: block;
-  margin: 2em 0;
+  margin: 2.5rem auto; /* 增加上下边距 */
+  border-radius: 6px;  /* 添加柔和圆角 */
+  border: 1px solid var(--border); /* 使用已有的变量边框 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); /* 添加微阴影 */
+  transition: transform 0.3s ease;
 }
 
+.prose img:hover {
+  transform: scale(1.01); /* 悬停微动 */
+}
 .img-placeholder {
   background: var(--code-bg);
   display: block;
@@ -194,17 +202,21 @@
 .prose blockquote {
   border-left: 2px solid var(--border);
   margin: 0 0 1.75em 0.125em;
-  padding: 0 0 0 1.375em;
-  text-align: left;
+  padding: 1rem 1.375rem; /* 稍微增加上下内边距 */
+  background: var(--code-bg); /* 添加淡色背景 */
+  border-radius: 0 8px 8px 0;
+  position: relative;
 }
 
-.prose blockquote p {
-  margin: 0;
-}
-
-.prose blockquote cite {
-  display: inline-block;
-  margin-top: 0.5em;
+/* 添加你想要的 UI 小图案（加号） */
+.prose blockquote::after {
+  content: '+';
+  position: absolute;
+  top: 0.5rem;
+  right: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  opacity: 0.3;
 }
 
 /* Unordered lists */
@@ -212,8 +224,8 @@
   list-style-type: none;
   padding-left: 0;
   margin-left: 1rem;
-  margin-bottom: 1.75em;
-  line-height: 1.75;
+  margin-bottom: 1.8em;
+  line-height: 1.8;
 }
 
 .prose ul ul {
@@ -367,22 +379,26 @@
 
 /* Horizontal rule */
 .prose hr {
-  margin: 3.75em 0;
-  height: auto;
+  margin: 4rem 0;
+  height: 1px;
   border: none;
-  background: none;
-  text-align: center;
+  background: var(--border); /* 改为实线 */
   position: relative;
+  opacity: 0.5;
 }
 
 .prose hr::before {
-  content: '***';
-  font-family: var(--mono);
-  color: var(--text-tertiary);
-  font-size: 0.875em;
-  letter-spacing: 0.25em;
+  content: ''; /* 去掉原有的星号 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  background: var(--bg); /* 用背景色遮挡中央 */
+  border: 1px solid var(--border);
+  border-radius: 50%;
 }
-
 /* Keyboard input */
 .prose kbd {
   font-family: var(--mono);
