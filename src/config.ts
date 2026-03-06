@@ -4,8 +4,8 @@ export const themeConfig: ThemeConfig = {
   // SITE INFO ///////////////////////////////////////////////////////////////////////////////////////////
   site: {
     website: 'https://chiri.the3ash.com/', // Site domain
-    title: 'CHIRI', // Site title
-    author: '3ASH', // Author name
+    title: '刘羽樊 作品集 lyfportfolio', // Site title
+    author: 'lyf', // Author name
     description: 'Minimal blog built by Astro', // Site description
     language: 'en-US' // Default language
   },
