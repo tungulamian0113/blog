@@ -19,9 +19,9 @@ const finalWidth = shouldUseCustomWidth ? `${widthValue}rem` : '25rem'
 
 <html lang={language}>
   <head>
-    <ThemeManager />
-    {fadeAnimation && <ClientRouter />}
-    <slot name="head" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Source+Serif+4:opsz,wght@8..144,400;700&display=swap" rel="stylesheet">
   </head>
   <body
     data-centered={themeConfig.general.centeredLayout}
