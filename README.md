@@ -46,7 +46,7 @@ Check the [demo](https://chiri.the3ash.com/) for more details.
 
 &emsp;[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start) [![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new)
 
-## Commands
+## Commands 
 
 - `pnpm new <title>` - Create a new post (use `_title` for drafts)
 - `pnpm update-theme` - Update the theme to the latest version
