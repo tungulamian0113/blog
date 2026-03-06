@@ -9,20 +9,57 @@ import ThemeToggle from '@/components/ui/ThemeToggle.astro'
     <ThemeToggle />
   </nav>
 </header>
+
 <style>
   header {
-    margin: 0;
+    /* 核心：固定在顶部并产生模糊感 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    
+    /* 70% 透明度配合 12px 模糊，这就是果冻般的质感 */
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    
+    /* 极细的底部边框，增加精致感 */
+    border-bottom: 1px solid var(--border);
+    
+    /* 导航栏高度 */
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
   }
+
+  /* 适配深色模式：让背景变暗但保持透明 */
+  :global(html.dark) header {
+    background-color: rgba(28, 28, 28, 0.75);
+  }
+
   nav {
+    width: 100%;
+    /* 自动匹配你 global.css 里定义的宽度，确保对齐 */
+    max-width: var(--content-width); 
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 1.5rem;
   }
+
   header a {
     font-weight: var(--font-weight-bold);
     color: var(--text-primary);
     text-decoration: none;
     min-width: 3rem;
     display: inline-block;
+    transition: opacity 0.2s ease;
+  }
+
+  header a:hover {
+    opacity: 0.6; /* 悬停时轻微变淡，增加交互感 */
   }
 </style>
