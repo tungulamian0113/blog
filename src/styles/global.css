@@ -2,171 +2,69 @@
 @import './post.css';
 
 :root {
-  /* 基础配置 */
-  --content-width: 55rem; /* 增加宽度，让介绍词更舒展 */
-  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --serif: 'Source Serif 4', Besley, Georgia, serif;
-  --mono: 'SF Mono', SFMono-Regular, monospace;
-
-  --font-size-s: 0.8125rem;
-  --font-size-m: 1rem;
-  --font-size-l: 1.125rem;
-
-  --font-weight-light: 350;
-  --font-weight-regular: 400;
-  --font-weight-bold: 600;
-
-  --spacing-s: 0.02em;
-  --spacing-m: 0.01em; 
-
-  /* 聚光灯配色方案 - 默认亮色 */
+  --content-width: 45rem; /* 设置一个舒适的宽度 */
   --bg: #0f172a;           /* 两侧深藏青 */
-  --content-bg: #fcfaf7;   /* 中间暖色纸张感 */
-  --content-text: #1e293b; /* 中间文字深色 */
-  
-  --text-primary: #ffffff; /* 导航栏文字白色 */
-  --text-secondary: rgba(255, 255, 255, 0.6);
-  --text-tertiary: rgba(255, 255, 255, 0.3);
-  --border: rgba(255, 255, 255, 0.1);
-  --selection: rgba(0, 0, 0, 0.1);
-  --code-bg: rgba(0, 0, 0, 0.04);
-  --mark: #f3ffc4;
-
-  /* 代码高亮配色基础 */
-  --astro-code-background: rgba(0, 0, 0, 0.03);
-  --astro-code-foreground: #1e293b;
+  --content-bg: #fcfaf7;   /* 中间暖色背景 */
+  --content-text: #1e293b; /* 关键：中间文字必须是深色 */
+  --nav-bg: rgba(15, 23, 42, 0.9);
 }
 
-/* 强制深色模式下的配色逻辑 */
-html.dark {
-  --bg: #000000;
-  --content-bg: #1a1a1a;
-  --content-text: #e2e8f0;
-  --text-primary: #ffffff;
-  --border: rgba(255, 255, 255, 0.1);
-}
-
-/* --- 全局布局逻辑 --- */
-
-html {
-  background-color: var(--bg);
-  scroll-behavior: smooth;
-  transition: background-color 0.3s ease;
-}
-
-body {
-  font-family: var(--sans);
+/* 基础设置 */
+html, body {
   margin: 0;
   padding: 0;
+  background-color: var(--bg); /* 全局深色底 */
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;      /* 水平居中内容列 */
-  background-color: var(--bg);
-  color: var(--text-primary); /* 外部默认文字白色 */
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
 }
 
-/* 核心：强制渲染中间的“浅色列” */
-/* 这里使用了万能匹配，确保不管你的容器叫 main 还是 div 都能被抓住 */
-/* --- 修正后的全局布局逻辑 --- */
-
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  background-color: var(--bg); /* 全局深藏青 */
-  display: flex;
-  flex-direction: column;
-  /* 确保 body 容器本身是居中的 */
-  align-items: center; 
-}
-
-/* 强制抓住所有可能的容器并使其居中 */
-body > div, 
-body > main, 
-.container, 
-#main-content,
-article.prose {
-  background-color: var(--content-bg) !important;
-  color: var(--content-text) !important;
-  
-  /* 宽度与居中的关键 */
-  width: 100% !important;
-  max-width: var(--content-width) !important; /* 确保这里引用了 42rem */
-  margin: 0 auto !important; /* 左右 margin 为 auto 是居中的灵魂 */
-  
-  /* 视觉修正 */
-  min-height: 100vh;
-  padding: 8rem 2.5rem 4rem 2.5rem !important;
-  box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
-  box-sizing: border-box; /* 防止 padding 撑开宽度导致偏移 */
-  
-  /* 内部内容也需要垂直对齐 */
-  display: flex;
-  flex-direction: column;
-}
-
-/* 导航栏修正：确保它不随内容移动 */
-header {
-  width: 100% !important;
-  left: 0;
-  right: 0;
-}
-
-header nav {
+/* 居中核心：针对 Astro 常见的 main 或 div 容器 */
+main, .container, #main-content, .prose-container {
+  background-color: var(--content-bg);
+  color: var(--content-text);
   max-width: var(--content-width);
-  margin: 0 auto;
-  padding: 0 1.5rem;
+  margin: 0 auto; /* 绝对居中 */
+  padding: 6rem 2.5rem 4rem 2.5rem;
+  box-shadow: 0 0 50px rgba(0,0,0,0.3);
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
-/* 标题样式 */
-h1, h2, h3, .title h1 {
-  font-family: var(--serif);
-  color: var(--content-text) !important;
-  line-height: 1.3;
-  margin-top: 2rem;
-  margin-bottom: 1.5rem;
-  font-weight: 700;
+/* 文字清晰度修复 */
+p, li, span, div {
+  /* 只有在浅色背景区域内才应用深色字 */
+  color: inherit; 
 }
 
-/* 导航栏置顶与配色 */
+.prose p, .prose {
+  color: var(--content-text);
+  line-height: 2.0;
+  font-size: 1.05rem;
+}
+
+/* 导航栏修复 */
 header {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: rgba(15, 23, 42, 0.8) !important;
-  backdrop-filter: blur(12px);
+  background-color: var(--nav-bg);
+  backdrop-filter: blur(10px);
   height: 3.5rem;
   display: flex;
   align-items: center;
 }
 
+header nav {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
 header a {
-  color: #ffffff !important;
+  color: #ffffff !important; /* 导航栏文字强制白色 */
   text-decoration: none;
-  font-weight: 600;
-}
-
-/* 移动端适配 */
-@media (max-width: 768px) {
-  body > div, body > main {
-    padding: 5rem 1.5rem !important;
-    max-width: 100% !important;
-    box-shadow: none;
-  }
-}
-
-/* 跳动光标动画 */
-.typing-cursor {
-  display: inline-block;
-  color: var(--content-text);
-  margin-left: 4px;
-  animation: blink 1s infinite step-end;
-}
-@keyframes blink {
-  from, to { opacity: 1; }
-  50% { opacity: 0; }
 }
