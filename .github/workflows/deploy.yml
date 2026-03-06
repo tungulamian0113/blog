@@ -15,14 +15,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+- name: Checkout
+        uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm' # 看到你仓库里有 pnpm-lock.yaml，所以用 pnpm
+
       - name: Install pnpm
         run: npm install -g pnpm
+
       - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Astro
+        run: pnpm run build
         run: pnpm install
       - name: Build Astro
         run: pnpm run build
